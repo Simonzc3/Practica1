@@ -10,9 +10,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bpt, bPor, bDiv, bIgual, bMas, bMenos;
     private TextView Tv;
-    private String tx = "", op = "=";
+    private String tx = "", op = "";
     private double res = 0, op1 = 0;
-    private int fmas = 0, fmenos = 0, fmult = 0, fdiv = 0;
+    private int fmas = 0, fmenos = 0, fmult = 0, fdiv = 0,figual=0,fpunto=0,f2punto=0;
 
 
     @Override
@@ -48,22 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 op1 = Double.parseDouble(tx);
             }
             tx = "";
-            switch (op) {
-                case "+":
-                    res = res + op1;
-                    break;
-                case "-":
-                    res = res - op1;
-                    break;
-                case "*":
-                    res = res * op1;
-                    break;
-                case "/":
-                    res = res / op1;
-                    break;
-                default:
-                    res = res + op1;
-            }
+            resolver();
             op = "/";
             if (res == (int) res) {
                 Tv.setText(String.valueOf((int) res));
@@ -71,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 Tv.setText(String.valueOf(res));
             }
         }
+        f2punto=0;
     }
 
     public void Mult(View view) {
@@ -83,22 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 op1 = Double.parseDouble(tx);
             }
             tx = "";
-            switch (op) {
-                case "+":
-                    res = res + op1;
-                    break;
-                case "-":
-                    res = res - op1;
-                    break;
-                case "*":
-                    res = res * op1;
-                    break;
-                case "/":
-                    res = res / op1;
-                    break;
-                default:
-                    res = res + op1;
-            }
+            resolver();
+
             op = "*";
             if (res == (int) res) {
                 Tv.setText(String.valueOf((int) res));
@@ -106,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 Tv.setText(String.valueOf(res));
             }
         }
+        f2punto=0;
     }
 
     public void Menos(View view) {
@@ -115,58 +88,31 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 op1 = Double.parseDouble(tx);
             }
-            switch (op) {
-                case "+":
-                    res = res + op1;
-                    break;
-                case "-":
-                    res = res - op1;
-                    break;
-                case "*":
-                    res = res * op1;
-                    break;
-                case "/":
-                    res = res / op1;
-                    break;
-                default:
-                    res = res + op1;
-            }
-            op = "-";
+            resolver();
+
             if (res == (int) res) {
                 Tv.setText(String.valueOf((int) res));
             } else {
                 Tv.setText(String.valueOf(res));
             }
             tx = "";
+            op = "-";
         }
+        f2punto=0;
     }
 
     public void Mas(View view) {
 
         if (fmas == 0) {
             if (tx == "") {
-                op1 = 0;
+                op1 = 12345;
             } else {
                 op1 = Double.parseDouble(tx);
             }
             tx = "";
 
-            switch (op) {
-                case "+":
-                    res = res + op1;
-                    break;
-                case "-":
-                    res = res - op1;
-                    break;
-                case "*":
-                    res = res * op1;
-                    break;
-                case "/":
-                    res = res / op1;
-                    break;
-                default:
-                    res = res + op1;
-            }
+            resolver();
+
 
             if (res == (int) res) {
                 Tv.setText(String.valueOf((int) res));
@@ -176,33 +122,19 @@ public class MainActivity extends AppCompatActivity {
             fmas = 1;
             op = "+";
         }
+        f2punto=0;
     }
 
     public void Igual(View view) {
-        if (op != "=") {
-            if ((tx == "") | (op == ".")) {
+        if ((figual == 0)&(fpunto==0)) {
+            if ((tx == "")) {
                 op1 = 0;
             } else {
                 op1 = Double.parseDouble(tx);
             }
-            tx = "";
-            switch (op) {
-                case "+":
-                    res = res + op1;
-                    break;
-                case "-":
-                    res = res - op1;
-                    break;
-                case "*":
-                    res = res * op1;
-                    break;
-                case "/":
-                    res = res / op1;
-                    break;
-                default:
-                    res = res + op1;
-            }
-            op = "=";
+
+           resolver();
+            figual=1;
             if (res == (int) res) {
                 Tv.setText(String.valueOf((int) res));
             } else {
@@ -210,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
             }
             op1 = 0;
             res = 0;
+            tx = "";
+            op="";
+            lbanderas();
+            f2punto=0;
+
         }
 
     }
@@ -217,98 +154,101 @@ public class MainActivity extends AppCompatActivity {
     public void bt6(View view) {
         tx = tx + "6";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt9(View view) {
         tx = tx + "9";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt0(View view) {
         tx = tx + "0";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt2(View view) {
         tx = tx + "2";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt5(View view) {
         tx = tx + "5";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt8(View view) {
         tx = tx + "8";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void btp(View view) {
-        if (op != ".") {
+        if ((fpunto==0)&(f2punto==0)) {
             tx = tx + ".";
             Tv.setText(tx);
-            op = ".";
         }
+        fpunto=1;
+        f2punto=1;
     }
 
     public void bt1(View view) {
         tx = tx + "1";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt4(View view) {
         tx = tx + "4";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt7(View view) {
         tx = tx + "7";
         Tv.setText(tx);
-        fmas = 0;
-        fmenos = 0;
-        fmult = 0;
-        fdiv = 0;
+        lbanderas();
     }
 
     public void bt3(View view) {
         tx = tx + "3";
         Tv.setText(tx);
+        lbanderas();
+    }
+
+    public void resolver(){
+        switch (op) {
+            case "+":
+                res = res + op1;
+                break;
+            case "-":
+                res = res - op1;
+                break;
+            case "*":
+                res = res * op1;
+                break;
+            case "/":
+                res = res / op1;
+                break;
+            default:
+                res = op1;
+        }
+    }
+
+   public void lbanderas(){
         fmas = 0;
         fmenos = 0;
         fmult = 0;
         fdiv = 0;
+        figual=0;
+        fpunto=0;
+
+
+
+
     }
 }
